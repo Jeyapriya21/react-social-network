@@ -8,14 +8,28 @@ import Register from './screens/Register';
 
 export default class App extends React.Component {
 
+    state = {
+        nomEcran: 'Login'
+    }
+
     render() {
+        let ecran = null;
+        if (this.state.nomEcran == 'Login') {
+            ecran = (<Login />);
+        } else if (this.state.nomEcran == 'Forgot') {
+            ecran = (<Forgot />);
+        } else if (this.state.nomEcran == 'Friends') {
+            ecran = (<Friends />);
+        } else if (this.state.nomEcran == 'Profile') {
+            ecran = (<Profile />);
+        } else if (this.state.nomEcran == 'Register') {
+            ecran = (<Register />);
+        } else {
+            ecran = null;
+        }
         return (
             <View style={styles.container}>
-                <Forgot />
-                <Friends />
-                <Login />
-                <Profile />
-                <Register />
+                {ecran}
             </View>
           );
     }
