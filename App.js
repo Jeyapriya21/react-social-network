@@ -12,18 +12,24 @@ export default class App extends React.Component {
         nomEcran: 'Login'
     }
 
+    handleChangeScreen = (pageEnQuestion) => () => {
+        this.setState({
+            nomEcran: pageEnQuestion
+        });
+    }
+
     render() {
         let ecran = null;
         if (this.state.nomEcran == 'Login') {
-            ecran = (<Login />);
+            ecran = (<Login changeScreen={this.handleChangeScreen} />);
         } else if (this.state.nomEcran == 'Forgot') {
-            ecran = (<Forgot />);
+            ecran = (<Forgot changeScreen={this.handleChangeScreen} />);
         } else if (this.state.nomEcran == 'Friends') {
-            ecran = (<Friends />);
+            ecran = (<Friends changeScreen={this.handleChangeScreen} />);
         } else if (this.state.nomEcran == 'Profile') {
-            ecran = (<Profile />);
+            ecran = (<Profile changeScreen={this.handleChangeScreen} />);
         } else if (this.state.nomEcran == 'Register') {
-            ecran = (<Register />);
+            ecran = (<Register changeScreen={this.handleChangeScreen} />);
         } else {
             ecran = null;
         }
