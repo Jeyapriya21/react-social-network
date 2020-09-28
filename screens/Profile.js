@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, Button } from 'react-native';
 
 export default class Profile extends React.Component {
 
@@ -7,6 +7,8 @@ export default class Profile extends React.Component {
         return (
             <View style={styles.container}>
                 <Text>Profile</Text>
+                <Button title="Voir mes amis"  onPress={this.props.changeScreen('Friends')} />
+                <Button title="Déconnexion"  onPress={this.props.changeScreen('Login')} />
             </View>
           );
     }

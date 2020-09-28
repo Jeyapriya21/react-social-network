@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, Button } from 'react-native';
 
 export default class Friends extends React.Component {
 
@@ -7,6 +7,7 @@ export default class Friends extends React.Component {
         return (
             <View style={styles.container}>
                 <Text>Friends</Text>
+                <Button title="Retour"  onPress={this.props.changeScreen('Profile')} />
             </View>
           );
     }
