@@ -33,6 +33,11 @@ export default class UserService {
         return this.users;
     }
 
+    authorize(username, password) {
+        const user = this.get(username);
+        return user == null || user.password != password ? null : user; 
+    }
+
     get(requestedUsername) {
         const filteredUsers = this.users.filter(user => user.username == requestedUsername);
         return filteredUsers.length <= 0 ? null : filteredUsers[0];
