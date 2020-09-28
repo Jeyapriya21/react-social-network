@@ -43,17 +43,20 @@ export default class UserService {
         return filteredUsers.length <= 0 ? null : filteredUsers[0];
     }
 
-    create(firstname, lastname, username, email, password) {
+    create(firstname, lastname, email, username, password) {
         const foundUser = this.get(username);
         if (foundUser == null) {
-            this.users.push({
+            const newUser = {
                 firstname: firstname,
                 lastname: lastname,
                 username: username,
                 email: email,
                 password: password
-            })
+            };
+            this.users.push(newUser);
+            return newUser;
         }
+        return null;
     }
 
     /**

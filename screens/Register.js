@@ -1,7 +1,10 @@
 import React from 'react';
 import { StyleSheet, View, Text, Button, TextInput } from 'react-native';
+import ServiceContext from '../ServiceContext';
 
 export default class Register extends React.Component {
+
+    static contextType = ServiceContext;
 
     state = {
         email: '',
@@ -48,6 +51,13 @@ export default class Register extends React.Component {
         })
     }
 
+    handleConfirm = () => {
+        const user = this.context.userService.create(this.state.firstname, this.state.lastname, this.state.email, this.state.username, this.state.password);
+        if (user != null) {
+            this.props.changeScreen('Login')();
+        }
+    }
+
     render() {
         /**
          * EMAIL
@@ -67,7 +77,7 @@ export default class Register extends React.Component {
                 <TextInput secureTextEntry={true} value={this.state.password} onChangeText={this.handleChangePassword} />
                 <TextInput secureTextEntry={true} value={this.state.confirmPassword} onChangeText={this.handleChangeConfirmPassword} />
                 <Button title="Retour"  onPress={this.props.changeScreen('Login')} />
-                <Button title="Valider"  onPress={this.props.changeScreen('Profile')} />
+                <Button title="Valider"  onPress={this.handleConfirm} />
             </View>
           );
     }
