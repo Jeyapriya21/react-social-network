@@ -12,7 +12,8 @@ export default class UserService {
             lastname: 'Tagada',
             username: 'soso',
             email: 'sophie@tag.com',
-            password: 'sophie'
+            password: 'sophie',
+            follow_user_ids: []
         },
         {
             id: 2,
@@ -20,7 +21,8 @@ export default class UserService {
             lastname: 'Burt',
             username: 'kevin.burt',
             email: 'kevin@burt.com',
-            password: 'kevin'
+            password: 'kevin',
+            follow_user_ids: [1]
         },
         {
             id: 3,
@@ -28,7 +30,8 @@ export default class UserService {
             lastname: 'Cross',
             username: 'jeremy.cross',
             email: 'jeremy@cross.com',
-            password: 'jeremy'
+            password: 'jeremy',
+            follow_user_ids: [1, 2, 384, 883, 8483, 895]
         }
     ];
 
@@ -72,5 +75,24 @@ export default class UserService {
             return;
         }
         user[key] = value;
+    }
+
+    getUserById(idToMatch) {
+        const matchingUsersToUserId = this.users.filter(user => user.id == idToMatch);
+        if (matchingUsersToUserId.length <= 0) {
+            return null;
+        }
+        const user = matchingUsersToUserId[0];
+        return user;
+    }
+
+    follow(userIdA, userIdB) {
+        const userA = this.getUserById(userIdA);
+        userA.follow_user_ids.push(userIdB);
+    }
+
+    unfollow(userIdA, userIdB) {
+        const userA = this.getUserById(userIdA);
+        userA.follow_user_ids = userA.follow_user_ids.filter(chiffre => chiffre != userIdB);
     }
 }
