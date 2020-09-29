@@ -15,7 +15,7 @@ export default class Profile extends React.Component {
     // 2. React execute componentDidMount lors de l'initialisation
     componentDidMount() {
         this.setState({
-            listeDePosts: this.context.postService.list()
+            listeDePosts: this.context.postService.list(this.props.currentUser.id)
         })
     }
 
@@ -23,7 +23,7 @@ export default class Profile extends React.Component {
     handleLike = (post) => () => {
         this.context.postService.update(post.id, 'likes', post.likes + 1);
         this.setState({
-            listeDePosts: this.context.postService.list()
+            listeDePosts: this.context.postService.list(this.props.currentUser.id)
         });
     }
 
@@ -36,7 +36,7 @@ export default class Profile extends React.Component {
     handlePost = () => {
         this.context.postService.create(this.props.currentUser.id, this.state.postText);
         this.setState({
-            listeDePosts: this.context.postService.list()
+            listeDePosts: this.context.postService.list(this.props.currentUser.id)
         });
     }
 

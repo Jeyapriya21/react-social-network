@@ -26,8 +26,8 @@ export default class PostService {
         }
     ]
 
-    list() {
-        return this.posts;
+    list(userId) {
+        return this.posts.filter(post => post.user_id == userId);
     }
 
     get(post_id) {
@@ -36,6 +36,10 @@ export default class PostService {
     }
 
     create(user_id, content) {
+        if (user_id <= 0 || !content || content == '') {
+            return;
+        }
+
         const nouveauPost = {
             content: content,
             user_id: user_id,
