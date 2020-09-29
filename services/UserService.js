@@ -31,7 +31,7 @@ export default class UserService {
             username: 'jeremy.cross',
             email: 'jeremy@cross.com',
             password: 'jeremy',
-            follow_user_ids: [1, 2, 384, 883, 8483, 895]
+            follow_user_ids: [1, 2]
         }
     ];
 
@@ -94,5 +94,10 @@ export default class UserService {
     unfollow(userIdA, userIdB) {
         const userA = this.getUserById(userIdA);
         userA.follow_user_ids = userA.follow_user_ids.filter(chiffre => chiffre != userIdB);
+    }
+
+    listFollowees(userId) {
+        const user = this.getUserById(userId);
+        return user.follow_user_ids.map(chiffre => this.getUserById(chiffre));
     }
 }

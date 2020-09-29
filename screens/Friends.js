@@ -1,24 +1,39 @@
 import React from 'react';
 import { StyleSheet, View, Text, Button, TextInput } from 'react-native';
+import ServiceContext from '../ServiceContext';
 
 export default class Friends extends React.Component {
 
+    static contextType = ServiceContext;
+
     state = {
-        searchText: ''
+        listOfFollowees: []
     }
 
-    handleChangeSearchText = (text) => {
+    componentDidMount() {
         this.setState({
-            searchText: text
+            listOfFollowees: this.context.userService.listFollowees(this.props.currentUser.id)
         })
     }
 
     render() {
+        let listOfFollowees = [];
+
+        for(const user of this.state.listOfFollowees) {
+            const element = (
+                <View>
+                    <Text>{user.firstname} {user.lastname}</Text>
+                    <Button title="Unfollow" />
+                </View>
+            );
+            listOfFollowees.push(element);
+        }
+
         return (
             <View style={styles.container}>
                 <Text>Friends</Text>
-                <TextInput value={this.state.searchText} onChangeText={this.handleChangeSearchText} />
                 <Button title="Retour"  onPress={this.props.changeScreen('Profile')} />
+                {listOfFollowees}
             </View>
           );
     }
