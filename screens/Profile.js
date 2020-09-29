@@ -6,18 +6,31 @@ export default class Profile extends React.Component {
 
     static contextType = ServiceContext;
 
+    state = {
+        listeDePosts: []
+    }
+
+    componentDidMount() {
+        this.setState({
+            listeDePosts: this.context.postService.list()
+        })
+    }
+
+    handleLike = (post) => () => {
+        this.context.postService.update(post.id, 'likes', post.likes + 1);
+        this.setState({
+            listeDePosts: this.context.postService.list()
+        });
+    }
+
     render() {
-
         let listeDesTagsPourLesPosts = [];
-
-        const listeDePosts = this.context.postService.list();
-
-        for (const post of listeDePosts) {
+        for (const post of this.state.listeDePosts) {
             const element = (
                 <View>
                     <Text>{post.content}</Text>
                     <Text>{post.likes} Like</Text>
-                    <Button title="Liker" />
+                    <Button title="Liker" onPress={this.handleLike(post)} />
                 </View>
             );
             listeDesTagsPourLesPosts.push(element);
