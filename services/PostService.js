@@ -41,7 +41,7 @@ export default class PostService {
             user_id: user_id,
             likes: 0
         }
-        this.posts.push(nouveauPost);
+        this.posts.unshift(nouveauPost);
     }
 
     /**

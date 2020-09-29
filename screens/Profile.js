@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, Button } from 'react-native';
+import { StyleSheet, View, Text, Button, TextInput } from 'react-native';
 import ServiceContext from '../ServiceContext';
 
 export default class Profile extends React.Component {
@@ -8,7 +8,8 @@ export default class Profile extends React.Component {
 
     // 1. Pas de state = pas de vue (l'écran ne va pas se rafraichir)
     state = {
-        listeDePosts: []
+        listeDePosts: [],
+        postText: ''
     }
 
     // 2. React execute componentDidMount lors de l'initialisation
@@ -21,6 +22,19 @@ export default class Profile extends React.Component {
     // 3. Method factory (personnalisé la méthode avec un post)
     handleLike = (post) => () => {
         this.context.postService.update(post.id, 'likes', post.likes + 1);
+        this.setState({
+            listeDePosts: this.context.postService.list()
+        });
+    }
+
+    handleChangePostText = (text) => {
+        this.setState({
+            postText: text
+        })
+    }
+
+    handlePost = () => {
+        this.context.postService.create(this.props.currentUser.id, this.state.postText);
         this.setState({
             listeDePosts: this.context.postService.list()
         });
@@ -44,6 +58,9 @@ export default class Profile extends React.Component {
         return (
             <View style={styles.container}>
                 <Text>Profile</Text>
+                <Text>Bonjour {this.props.currentUser.firstname} !</Text>
+                <TextInput value={this.state.postText} onChangeText={this.handleChangePostText} />
+                <Button title="Poster" onPress={this.handlePost} />
                 <Button title="Voir mes amis"  onPress={this.props.changeScreen('Friends')} />
                 <Button title="Déconnexion"  onPress={this.props.changeScreen('Login')} />
                 {listeDesTagsPourLesPosts}

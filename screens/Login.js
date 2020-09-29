@@ -26,6 +26,7 @@ export default class Login extends React.Component {
     handleLogin = () => {
         const user = this.context.userService.authorize(this.state.username, this.state.password);
         if (user != null) {
+            this.props.changeUser(user);
             this.props.changeScreen('Profile')();
         }
     }

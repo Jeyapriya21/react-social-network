@@ -9,7 +9,8 @@ import Register from './screens/Register';
 export default class App extends React.Component {
 
     state = {
-        nomEcran: 'Login'
+        nomEcran: 'Login',
+        connectedUser: null
     }
 
     handleChangeScreen = (pageEnQuestion) => () => {
@@ -18,16 +19,22 @@ export default class App extends React.Component {
         });
     }
 
+    handleConnect = (user) => {
+        this.setState({
+            connectedUser: user
+        })
+    }
+
     render() {
         let ecran = null;
         if (this.state.nomEcran == 'Login') {
-            ecran = (<Login changeScreen={this.handleChangeScreen} />);
+            ecran = (<Login changeScreen={this.handleChangeScreen} changeUser={this.handleConnect} />);
         } else if (this.state.nomEcran == 'Forgot') {
             ecran = (<Forgot changeScreen={this.handleChangeScreen} />);
         } else if (this.state.nomEcran == 'Friends') {
-            ecran = (<Friends changeScreen={this.handleChangeScreen} />);
+            ecran = (<Friends currentUser={this.state.connectedUser} changeScreen={this.handleChangeScreen} />);
         } else if (this.state.nomEcran == 'Profile') {
-            ecran = (<Profile changeScreen={this.handleChangeScreen} />);
+            ecran = (<Profile currentUser={this.state.connectedUser} changeScreen={this.handleChangeScreen} />);
         } else if (this.state.nomEcran == 'Register') {
             ecran = (<Register changeScreen={this.handleChangeScreen} />);
         } else {

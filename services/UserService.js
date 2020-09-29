@@ -7,6 +7,7 @@ export default class UserService {
      */
     users = [
         {
+            id: 1,
             firstname: 'Sophie',
             lastname: 'Tagada',
             username: 'soso',
@@ -14,6 +15,7 @@ export default class UserService {
             password: 'sophie'
         },
         {
+            id: 2,
             firstname: 'Kevin',
             lastname: 'Burt',
             username: 'kevin.burt',
@@ -21,6 +23,7 @@ export default class UserService {
             password: 'kevin'
         },
         {
+            id: 3,
             firstname: 'Jeremy',
             lastname: 'Cross',
             username: 'jeremy.cross',
