@@ -6,16 +6,19 @@ export default class Profile extends React.Component {
 
     static contextType = ServiceContext;
 
+    // 1. Pas de state = pas de vue (l'écran ne va pas se rafraichir)
     state = {
         listeDePosts: []
     }
 
+    // 2. React execute componentDidMount lors de l'initialisation
     componentDidMount() {
         this.setState({
             listeDePosts: this.context.postService.list()
         })
     }
 
+    // 3. Method factory (personnalisé la méthode avec un post)
     handleLike = (post) => () => {
         this.context.postService.update(post.id, 'likes', post.likes + 1);
         this.setState({
@@ -23,6 +26,8 @@ export default class Profile extends React.Component {
         });
     }
 
+    // 4. Render est exécuté plein de fois par React (autant de fois qu'il le faut)
+    // DONC - Pas d'appel aux API ici = risque de bannissement, couts énormes
     render() {
         let listeDesTagsPourLesPosts = [];
         for (const post of this.state.listeDePosts) {
