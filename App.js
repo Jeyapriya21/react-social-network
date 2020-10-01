@@ -27,20 +27,18 @@ export default class App extends React.Component {
 
     render() {
         let ecran = null;
-        if (this.state.connectedUser) {
-            if (this.state.nomEcran == 'Login') {
-                ecran = (<Login changeScreen={this.handleChangeScreen} changeUser={this.handleConnect} />);
-            } else if (this.state.nomEcran == 'Forgot') {
-                ecran = (<Forgot changeScreen={this.handleChangeScreen} />);
-            } else if (this.state.nomEcran == 'Friends') {
-                ecran = (<Friends currentUser={this.state.connectedUser} changeScreen={this.handleChangeScreen} />);
-            } else if (this.state.nomEcran == 'Profile') {
-                ecran = (<Profile currentUser={this.state.connectedUser} changeScreen={this.handleChangeScreen} />);
-            } else if (this.state.nomEcran == 'Register') {
-                ecran = (<Register changeScreen={this.handleChangeScreen} />);
-            } else {
-                ecran = null;
-            }
+        if (this.state.nomEcran == 'Login') {
+            ecran = (<Login changeScreen={this.handleChangeScreen} changeUser={this.handleConnect} />);
+        } else if (this.state.nomEcran == 'Forgot') {
+            ecran = (<Forgot changeScreen={this.handleChangeScreen} />);
+        } else if (this.state.nomEcran == 'Friends') {
+            ecran = (<Friends currentUser={this.state.connectedUser} changeScreen={this.handleChangeScreen} />);
+        } else if (this.state.nomEcran == 'Profile') {
+            ecran = (<Profile currentUser={this.state.connectedUser} changeScreen={this.handleChangeScreen} />);
+        } else if (this.state.nomEcran == 'Register') {
+            ecran = (<Register changeScreen={this.handleChangeScreen} />);
+        } else {
+            ecran = null;
         }
         return (
             <View style={styles.container}>
