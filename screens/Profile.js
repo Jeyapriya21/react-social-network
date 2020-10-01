@@ -1,6 +1,8 @@
 import React from 'react';
-import { StyleSheet, View, Text, Button, TextInput } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import ServiceContext from '../ServiceContext';
+import AppButton from '../customs/AppButton';
+import AppInput from '../customs/AppInput';
 
 export default class Profile extends React.Component {
 
@@ -46,10 +48,12 @@ export default class Profile extends React.Component {
         let listeDesTagsPourLesPosts = [];
         for (const post of this.state.listeDePosts) {
             const element = (
-                <View>
-                    <Text>{post.content}</Text>
-                    <Text>{post.likes} Like</Text>
-                    <Button title="Liker" onPress={this.handleLike(post)} />
+                <View style={styles.postCard}>
+                    <Text style={styles.likeText}>{post.likes} Like</Text>
+                    <View style={styles.centerRow}>
+                        <Text style={styles.contentText}>{post.content}</Text>
+                        <AppButton title="Liker" onPress={this.handleLike(post)} />
+                    </View>
                 </View>
             );
             listeDesTagsPourLesPosts.push(element);
@@ -57,23 +61,69 @@ export default class Profile extends React.Component {
 
         return (
             <View style={styles.container}>
-                <Text>Profile</Text>
-                <Text>Bonjour {this.props.currentUser.firstname} !</Text>
-                <TextInput value={this.state.postText} onChangeText={this.handleChangePostText} />
-                <Button title="Poster" onPress={this.handlePost} />
-                <Button title="Voir mes amis"  onPress={this.props.changeScreen('Friends')} />
-                <Button title="Déconnexion"  onPress={this.props.changeScreen('Login')} />
-                {listeDesTagsPourLesPosts}
+                <View style={styles.left}>
+                    <Text style={styles.helloSmall}>Bonjour</Text>
+                    <Text style={styles.helloBig}>{this.props.currentUser.firstname} !</Text>
+                </View>
+                <View style={styles.centerRow}>
+                    <AppButton title="Voir mes amis" onPress={this.props.changeScreen('Friends')} classBtn="third" />
+                    <AppButton title="Déconnexion" onPress={this.props.changeScreen('Login')} />
+                </View>
+                <View style={styles.inputPost}>
+                    <AppInput placeholder="Votre text ici ..." value={this.state.postText} onChangeText={this.handleChangePostText} />
+                    <AppButton title="Poster" onPress={this.handlePost} classBtn="primary" />
+                </View>
+                <View style={styles.postsView}>
+                    {listeDesTagsPourLesPosts}
+                </View>
             </View>
-          );
+        );
     }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#EEE',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    centerRow: {
+        alignItems: 'center',
+        flexDirection: 'row'
+    },
+    inputPost: {
+        alignItems: 'center',
+        flexDirection: 'row',
+        margin: 20
+    },
+    postsView: {
+        flex: 1,
+        alignSelf: 'stretch',
+        borderTopWidth: 1,
+        borderColor: '#DDD',
+        padding: 20
+    },
+    left: {
+        alignItems: 'left',
+        alignSelf: 'stretch',
+        margin: 30,
+    },
+    helloSmall: {
+        fontSize: 14
+    },
+    helloBig: {
+        fontSize: 45,
+        color: '#187883'
+    },
+    postCard: {
+        alignSelf: 'stretch',
+    },  
+    contentText: {
+        width: 250,
+        fontSize: 16
+    },
+    likeText: {
+        fontSize: 12,
+        color: '#799dde'
+    }
 });

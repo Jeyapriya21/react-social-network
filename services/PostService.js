@@ -2,25 +2,25 @@ export default class PostService {
     posts = [
         {
             id: 1,
-            content: 'Salut je bois un verre au starbucks',
+            content: 'Réunion sur la sécurité dans 15 min dans la salle 202',
             user_id: 2,
             likes: 0
         },
         {
             id: 2,
-            content: 'Je me promene dans le parc',
+            content: 'Appel du client McLaren pour demande de confirmation technique',
             user_id: 1,
             likes: 0
         },
         {
             id: 3,
-            content: 'Je suis heureux',
+            content: 'Investissement accepté pour McLaren',
             user_id: 2,
             likes: 4
         },
         {
             id: 4,
-            content: 'Super, nous avons un beau cadeaux',
+            content: 'Réunion des mesures sanitaires en cours pour les intéressés (203)',
             user_id: 2,
             likes: 0
         }

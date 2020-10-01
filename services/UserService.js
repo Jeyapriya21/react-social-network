@@ -22,7 +22,7 @@ export default class UserService {
             username: 'kevin.burt',
             email: 'kevin@burt.com',
             password: 'kevin',
-            follow_user_ids: [1]
+            follow_user_ids: [1, 3]
         },
         {
             id: 3,

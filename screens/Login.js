@@ -1,6 +1,8 @@
 import React from 'react';
-import { StyleSheet, View, Text, Button, TextInput } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import ServiceContext from '../ServiceContext';
+import AppButton from '../customs/AppButton';
+import AppInput from '../customs/AppInput';
 
 export default class Login extends React.Component {
 
@@ -35,12 +37,14 @@ export default class Login extends React.Component {
         return (
             // class="container" => style={styles.container}
             <View style={styles.container}>
-                <Text style={styles.textForLogin}>Bienvenue</Text>
-                <TextInput placeholder="Username ..." style={styles.inputToto} value={this.state.username} onChangeText={this.handleChangeUsername} />
-                <TextInput placeholder="Password ..." style={styles.inputToto} secureTextEntry={true} value={this.state.password} onChangeText={this.handleChangePassword} />
-                <Button title="S'identifier" onPress={this.handleLogin} />
-                <Button title="S'enregister" onPress={this.props.changeScreen('Register')} />
-                <Button title="Mot de passe oublié" onPress={this.props.changeScreen('Forgot')} />
+                <Text style={styles.textForLogin}>Bienvenue dans</Text>
+                <Text style={styles.titleForLogin}>TeamChat</Text>
+                <Text style={styles.description}>Transmettez en un éclair vos informations à l'ensemble de l'équipe de votre entreprise</Text>
+                <AppInput placeholder="Username ..." style={styles.inputToto} value={this.state.username} onChangeText={this.handleChangeUsername} />
+                <AppInput secureTextEntry={true} placeholder="Password ..." style={styles.inputToto} secureTextEntry={true} value={this.state.password} onChangeText={this.handleChangePassword} />
+                <AppButton title="S'identifier" onPress={this.handleLogin} classBtn="primary" />
+                <AppButton title="S'enregister" onPress={this.props.changeScreen('Register')} classBtn="primary" />
+                <AppButton title="Mot de passe oublié" onPress={this.props.changeScreen('Forgot')} classBtn="secondary" />
             </View>
         );
     }
@@ -49,18 +53,23 @@ export default class Login extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#EEE', // background-color => backgroundColor
         alignItems: 'center',
         justifyContent: 'center',
     },
-    inputToto: {
-        borderWidth: 1,
-        padding: 5,
-        margin: 5,
-        borderColor: '#DDD'
-    },
     textForLogin: {
-        fontSize: 26,
-        marginBottom: 20
+        fontSize: 16,
+        marginBottom: 5
+    },
+    titleForLogin: {
+        fontSize: 36,
+        marginBottom: 20,
+        color: '#799dde'
+    },
+    description: {
+        fontSize: 14,
+        alignSelf: 'stretch',
+        paddingLeft: 20,
+        marginBottom: 40,
+        width: 300
     }
 });
